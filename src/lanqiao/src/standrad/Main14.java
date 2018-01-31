@@ -10,16 +10,16 @@ public class Main14 {
     public static void main(String[] args) {
         Scanner in=new Scanner(System.in);
         int n=in.nextInt();
-//        int bin=Integer.valueOf(Integer.toBinaryString(n));
-//        System.out.println(bin);
 
         System.out.println( toResult(n));
 
 
     }
+    //转换为2进制
     public static String toBin(int n){
         return Integer.toBinaryString(n);
     }
+    //第一步
     public static String toResult(int n){
         StringBuilder sb=new StringBuilder();
         String str=toBin(n);
@@ -31,6 +31,7 @@ public class Main14 {
                 else if(len==1)
                     sb.append("2");
                 else
+                    //递归输出
                     sb.append("2("+toResult(len)+")");
                 if(len!=0)
                     sb.append("+");
