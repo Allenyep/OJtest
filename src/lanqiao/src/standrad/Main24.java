@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 /**
  * 算法训练 字串统计
+ * TODO:有两个用例过不了
  * Created by Administrator on 2018/1/31.
  */
 public class Main24 {
@@ -22,9 +23,10 @@ public class Main24 {
             sb.append(str.charAt(j));
         }
         hashMap.put(String.valueOf(sb),1);
+        sb.delete(0, n);
 
 
-        for (int i = 2; i < str.length() - n; i++) {
+        for (int i = 1; i < str.length() - n; i++) {
             for (int j = i; j < n + i; j++) {
                 sb.append(str.charAt(j));
             }
@@ -35,18 +37,31 @@ public class Main24 {
                     hasflag=true;
                     break;
                 }
+                hasflag=false;
             }
 
-            if(hasflag){
+            if(!hasflag){
                 hashMap.put(String.valueOf(sb), count);
-                hasflag=true;
             }
 
             sb.delete(0, n);
         }
-        System.out.println(hashMap.toString());
 
-        System.out.println(sb.toString());
+        int maxvalue=0;
+        String max="";
+        for(String s:hashMap.keySet()){
+            if(maxvalue<hashMap.get(s)){
+                maxvalue=hashMap.get(s);
+                max=s;
+            }
+            else if(maxvalue==hashMap.get(s)){
+                if(max.length()<=s.length()){
+                    max=s;
+                }
+            }
+        }
+
+        System.out.println(max);
 
     }
 }
