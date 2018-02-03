@@ -13,7 +13,23 @@ public class Main32 {
         int m=in.nextInt();
         int n=in.nextInt();
 
-        System.out.println(calc(m,n));
+//        System.out.println(calc(m,n));
+
+        int[][] arr=new int[21][21];
+        for(int i=0;i<=m;i++){
+            arr[i][0]=1;
+        }
+
+        for(int i=1;i<=m;i++){
+            for (int j=1;j<=n;j++){
+                if(i==j)
+                    arr[i][j] = arr[i][j - 1];
+                if(i>j){
+                    arr[i][j] = arr[i - 1][j] + arr[i][j - 1];
+                }
+            }
+        }
+        System.out.println(arr[m][n]);
 
     }
     public static int calc(int m,int n){

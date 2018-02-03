@@ -8,10 +8,12 @@ import java.util.Random;
  */
 public class RSASimple {
     public static void main(String[] args) {
-        //while (d<=1){
+        buildN();
+        buildD(E,faiN);
+        while (d<=1){
             buildN();
             buildD(E,faiN);
-       // }
+        }
 
         System.out.println("public:"+N+","+E);
         System.out.println("private:"+N+","+d);
@@ -34,6 +36,7 @@ public class RSASimple {
         return c;
     }
 
+    //解密
     public static long RSASimpleReboxing(long c){
         long m=1;
         for(int i=0;i<d;i++){
@@ -44,6 +47,7 @@ public class RSASimple {
         return m;
     }
 
+    //测试数据
     public static final int E=17;
     public static long p=61;
     public static long q=53;
@@ -66,6 +70,10 @@ public class RSASimple {
         p= primeArr[r.nextInt(100)];
         q= primeArr[r.nextInt(100)];
 
+        while (p==q){
+            q=primeArr[r.nextInt(100)];
+        }
+
         N= p*q;
         faiN=(p-1)*(q-1);
 //        System.out.println(p+" "+q+" "+N+" "+faiN);
@@ -75,12 +83,6 @@ public class RSASimple {
     public static void buildD(long E,long faiN){
         long[] result=extend_gcd(E,faiN);
         d=result[1];
-//        while (d<=1){
-//            buildN();
-//            result=extend_gcd(E,faiN);
-//            d=result[1];
-//        }
-
     }
 
     //判断素数
@@ -99,6 +101,7 @@ public class RSASimple {
 
     //扩展欧几里得算法，已知ab求解xy
     //返回的数组中，第一个值是最大公约数，第二个值表示C++语言实现中的x，第三个值表示y。
+    //TODO:这个算法会让生成的d为负数，造成解密失败
     public static long[] extend_gcd(long a,long b){
         long ans;
         long[] result=new long[3];
