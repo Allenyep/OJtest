@@ -92,6 +92,7 @@ public class Main12_2 {
         int a = in.nextInt();
         int b = in.nextInt();
         test.getResult(a, b);
+        in.close();
     }
     
 }
